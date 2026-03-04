@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Target, ExternalLink, Plus, Trash2, CheckCircle2, Circle, Calendar, Zap, Trophy, RefreshCw, Lock } from 'lucide-react';
-
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 export default function GoalsPage({ handle, targetRank = "Specialist" }) {
   const [goals, setGoals] = useState([]);
   const [text, setText] = useState('');
@@ -11,7 +11,7 @@ export default function GoalsPage({ handle, targetRank = "Specialist" }) {
 
   const fetchGoals = useCallback(async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/goals/${handle}`);
+      const res = await axios.get(`${API_BASE}/api/goals/${handle}`);
       setGoals(res.data);
     } catch (err) {
       console.error("Error fetching goals:", err);
@@ -50,7 +50,7 @@ export default function GoalsPage({ handle, targetRank = "Specialist" }) {
 
           if (isSolved) {
             // This triggers the backend update
-            await axios.patch(`http://localhost:5000/api/goals/${goal._id}`);
+            await axios.patch(`${API_BASE}/api/goals/${goal._id}`);
           }
         }
       }
@@ -84,14 +84,14 @@ export default function GoalsPage({ handle, targetRank = "Specialist" }) {
       alert("Mission Deployment Error: A valid Codeforces Problem URL is required.");
       return;
     }
-    await axios.post('http://localhost:5000/api/goals', { handle, text, link, tier });
+    await axios.post(`${API_BASE}/api/goals`, { handle, text, link, tier });
     setText(''); setLink(''); setTier('Silver');
     fetchGoals();
   };
 
   const deleteGoal = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/goals/${id}`);
+      await axios.delete(`${API_BASE}/api/goals/${id}`);
       setGoals(goals.filter(g => g._id !== id));
     } catch (err) {
       console.error("Error deleting goal:", err);

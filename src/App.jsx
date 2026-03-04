@@ -9,7 +9,7 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, R
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import { subYears } from 'date-fns';
-
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const CHART_COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4'];
 
 export default function App() {
@@ -44,7 +44,7 @@ useEffect(() => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/api/get-code', { handle, email });
+      const res = await axios.post(`${API_BASE}/api/get-code`, { handle, email });
       setSecretCode(res.data.secretCode);
       setStep(2);
     } catch (err) { setError("Backend Connection Failed"); }
@@ -81,7 +81,7 @@ useEffect(() => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/api/analyze', { handle });
+      const res = await axios.post(`${API_BASE}/api/analyze`, { handle });
       setData(res.data);
       setStep(3);
     } catch (err) { setError(err.response?.data?.message || "Verify the code on CF first!"); }
