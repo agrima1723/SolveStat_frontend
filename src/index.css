@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #050816;
+  --card-bg: rgba(17, 25, 40, 0.75);
+}
+/* Ensure the heatmap takes up space */
+.heatmap-container {
+  padding: 20px 0;
+  width: 100%;
+}
+
+/* Heatmap Square Colors */
+/* Change these to match your Green Legend */
+
+.react-calendar-heatmap .color-scale-1 { fill: #c6e48b; } /* Light Green */
+.react-calendar-heatmap .color-scale-2 { fill: #7bc96f; } /* Medium Green */
+.react-calendar-heatmap .color-scale-3 { fill: #239a3b; } /* Dark Green */
+.react-calendar-heatmap .color-scale-4 { fill: #196127; } /* Deepest Green (Was likely Orange) */
+
+/* If your code uses 'color-empty' */
+.react-calendar-heatmap .color-empty { fill: #ebedf0; }Orange for high activity
+
+/* Smooth edges for the squares */
+.react-calendar-heatmap rect {
+  rx: 3px;
+  ry: 3px;
+}
+
+/* Tooltip or Hover effect */
+.react-calendar-heatmap rect:hover {
+  stroke: #64748b;
+  stroke-width: 1px;
+}
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 24px;
+}
+
+.glow-shadow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
