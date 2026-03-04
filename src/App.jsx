@@ -30,7 +30,7 @@ export default function App() {
   };
   const [goals, setGoals] = useState([]);
 const [allGoalsCompleted, setAllGoalsCompleted] = useState(false);
-
+const [analysis, setAnalysis] = useState(null);
 // Function to check completion
 useEffect(() => {
   if (goals.length > 0) {
